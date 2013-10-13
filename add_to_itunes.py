@@ -41,6 +41,12 @@ def set_metadata(filepath, show, season, episode, title, plot):
             command.append(flag)
             command.append(value)
 
+    artwork = os.path.join(path, os.path.basename(filepath).replace('.mp4', '.jpg'))
+
+    if artwork.find('.jpg') != -1 and os.path.isfile(artwork):
+        command.append('--artwork')
+        command.append(artwork)
+
     print >> sys.stderr, command
     subprocess.check_call(command)
 
